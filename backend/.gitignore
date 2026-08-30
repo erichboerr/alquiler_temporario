@@ -1,0 +1,17 @@
+# Dependencias
+node_modules
+
+# Variables de entorno con credenciales reales — NUNCA subir al repo
+.env
+.env.development
+.env.production
+
+# .env.example SÍ se commitea — es el template sin credenciales para nuevos devs
+# .env.example
+
+# Logs generados en runtime
+logs/
+*.log
+
+# Fotos de la propiedad subidas desde el panel admin — no se versionan
+uploads/

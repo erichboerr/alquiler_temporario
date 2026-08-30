@@ -1,0 +1,27 @@
+@import "tailwindcss";
+
+/* Tipografías: Fraunces (display, con carácter, cálida) + Inter (texto/UI) */
+@import url("https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap");
+
+/*
+ * Tokens de la landing pública (paleta costera).
+ * Prefijo "landing-" para no chocar con nada que uses en el panel admin.
+ * Definidos con @theme (Tailwind v4) → generan clases utilitarias automáticamente:
+ * bg-landing-arena, text-landing-marino, border-landing-marea, etc.
+ */
+@theme {
+  --color-landing-arena: #f3eee2;       /* fondo general, arena cálida */
+  --color-landing-arena-osc: #e8dfcb;   /* secciones alternadas / bordes */
+  --color-landing-marino: #16324f;      /* texto principal, headlines */
+  --color-landing-marino-suave: #3c5872; /* texto secundario */
+  --color-landing-marea: #1f7a6c;       /* acento: precios, disponible, links */
+  --color-landing-marea-suave: #e3f0ec; /* fondo suave del acento */
+  --color-landing-atardecer: #d9683b;   /* acento cálido puntual (poco uso) */
+
+  --font-display: "Fraunces", serif;
+  --font-body: "Inter", sans-serif;
+}
+
+body {
+  font-family: var(--font-body);
+}
