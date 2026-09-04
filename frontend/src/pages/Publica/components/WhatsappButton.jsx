@@ -2,7 +2,8 @@ import { MessageCircle } from 'lucide-react';
 
 // Arma el link wa.me a partir del número y un mensaje.
 // numero: formato internacional sin '+' ni espacios (ej: "5492255123456")
-function armarLinkWhatsapp(numero, mensaje) {
+// Se exporta para reusarla en WhatsappIconLink (ícono chico de cada renglón de período).
+export function armarLinkWhatsapp(numero, mensaje) {
     const base = `https://wa.me/${numero}`;
     return mensaje ? `${base}?text=${encodeURIComponent(mensaje)}` : base;
 }

@@ -2,7 +2,7 @@ import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 
 export default defineConfig({
-   plugins: [react()],
+    plugins: [react()],
 
     // Proxy de desarrollo — redirige las llamadas /api al backend local.
     // Beneficio: evita problemas de CORS en dev sin tocar la configuración del servidor.

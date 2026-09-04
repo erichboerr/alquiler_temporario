@@ -43,7 +43,7 @@ const actualizarPropiedad = async (data) => {
 
     // Solo pisamos los campos que vinieron en el body, para poder actualizar
     // parcialmente desde el panel admin (ej: solo el WhatsApp) sin mandar todo el objeto.
-    const campos = ['nombre', 'direccion', 'descripcion', 'habitaciones', 'banos', 'caracteristicas', 'whatsappNumero', 'whatsappMensaje'];
+    const campos = ['nombre', 'direccion', 'descripcion', 'habitaciones', 'banos', 'ocupantes', 'caracteristicas', 'whatsappNumero', 'whatsappMensaje'];
     campos.forEach((campo) => {
         if (data[campo] !== undefined) propiedad[campo] = data[campo];
     });

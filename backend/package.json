@@ -7,8 +7,8 @@
   "scripts": {
     "start": "cross-env NODE_ENV=production node server.js",
     "dev": "cross-env NODE_ENV=development nodemon server.js",
-    "migrate": "cross-env NODE_ENV=development sequelize-cli db:migrate",
-    "seed": "cross-env NODE_ENV=development sequelize-cli db:seed:all"
+    "migrate": "cross-env NODE_ENV=development sequelize-cli db:migrate --config config/config.cjs --migrations-path migrations --seeders-path seeders --models-path models",
+    "seed": "cross-env NODE_ENV=development sequelize-cli db:seed:all --config config/config.cjs --migrations-path migrations --seeders-path seeders --models-path models"
   },
   "keywords": [],
   "author": "",
