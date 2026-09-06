@@ -19,13 +19,13 @@ const PropiedadCaracteristicas = ({ descripcion, caracteristicas }) => {
 
             {caracteristicas?.length > 0 && (
                 <ul className="mt-8 grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4">
-                    {caracteristicas.map((item, i) => (
+                    {caracteristicas.map((item) => (
                         <li
-                            key={i}
+                            key={item.id}
                             className="flex items-center gap-2.5 rounded-xl border border-landing-arena-osc bg-white px-4 py-3.5 text-sm font-medium text-landing-marino"
                         >
                             <Sparkles size={16} className="shrink-0 text-landing-marea" />
-                            <span>{item}</span>
+                            <span>{item.descripcion}</span>
                         </li>
                     ))}
                 </ul>

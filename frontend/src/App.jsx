@@ -16,7 +16,9 @@ import { setupInterceptors } from './common/services/api';
 import MainLayout from './common/components/MainLayout';
 import ProtectedRoute from './common/components/ProtectedRoute';
 import Login from './pages/Login/Login';
-import Dashboard from './pages/Dashboard/Dashboard';
+import AdminPropiedad from './pages/Admin/AdminPropiedad';
+import AdminFotos from './pages/Admin/AdminFotos';
+import AdminTemporada from './pages/Admin/AdminTemporada';
 import Landing from './pages/Publica/Landing';
 
 // AppContent va adentro de los Providers para poder usar sus hooks
@@ -45,8 +47,9 @@ function AppContent() {
             {/* Rutas protegidas — ProtectedRoute verifica sesión y rol */}
             <Route element={<ProtectedRoute />}>
                 <Route element={<MainLayout />}>
-                    <Route path="/dashboard" element={<Dashboard />} />
-                    {/* Aquí irán las rutas futuras: /usuarios, /reportes, etc. */}
+                    <Route path="/admin/propiedad" element={<AdminPropiedad />} />
+                    <Route path="/admin/fotos" element={<AdminFotos />} />
+                    <Route path="/admin/temporada" element={<AdminTemporada />} />
                 </Route>
             </Route>
 

@@ -1,12 +1,5 @@
 import { MessageCircle } from 'lucide-react';
-
-// Arma el link wa.me a partir del número y un mensaje.
-// numero: formato internacional sin '+' ni espacios (ej: "5492255123456")
-// Se exporta para reusarla en WhatsappIconLink (ícono chico de cada renglón de período).
-export function armarLinkWhatsapp(numero, mensaje) {
-    const base = `https://wa.me/${numero}`;
-    return mensaje ? `${base}?text=${encodeURIComponent(mensaje)}` : base;
-}
+import { armarLinkWhatsapp } from '../../../common/utils/whatsapp';
 
 // className opcional para adaptar el estilo (botón grande del hero vs. chico de cada tarjeta)
 const WhatsappButton = ({ numero, mensaje, children, className = '' }) => {
@@ -19,7 +12,7 @@ const WhatsappButton = ({ numero, mensaje, children, className = '' }) => {
             href={armarLinkWhatsapp(numero, mensaje)}
             target="_blank"
             rel="noopener noreferrer"
-            className={`inline-flex items-center justify-center gap-2 rounded-full bg-[#25D366] px-5 py-2.5 font-body font-semibold text-white transition-transform hover:scale-[1.03] hover:brightness-95 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-landing-marino ${className}`}
+            className={`inline-flex items-center justify-center gap-2 rounded-full bg-[#25D366] px-5 py-2.5 font-body font-semibold text-white transition-transform hover:scale-[1.03] hover:brightness-95 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-landing-marino ${className}`}
         >
             <MessageCircle size={18} />
             {children || 'Consultar por WhatsApp'}

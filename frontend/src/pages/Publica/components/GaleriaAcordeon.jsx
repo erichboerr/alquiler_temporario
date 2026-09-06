@@ -1,11 +1,14 @@
 import { useState } from 'react';
 import { ChevronDown, ImageOff } from 'lucide-react';
 import { getFotoUrl } from '../../../common/services/api';
+import Lightbox from './Lightbox';
 
 const GaleriaAcordeon = ({ fotos }) => {
   // Abierto por defecto: las fotos son parte central de la decisión de alquilar,
   // así que el visitante las ve apenas entra, no tiene que buscar el botón.
   const [abierto, setAbierto] = useState(true);
+  // Índice de la foto abierta en el Lightbox; null = cerrado
+  const [indiceLightbox, setIndiceLightbox] = useState(null);
   const hayFotos = fotos && fotos.length > 0;
 
   return (
@@ -34,10 +37,11 @@ const GaleriaAcordeon = ({ fotos }) => {
             <div className="border-t border-landing-arena-osc px-6 py-6">
               {hayFotos ? (
                 <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4">
-                  {fotos.map((foto) => (
-                    <div
+                  {fotos.map((foto, index) => (
+                    <button
                       key={foto.id}
-                      className="aspect-square overflow-hidden rounded-xl bg-landing-arena"
+                      onClick={() => setIndiceLightbox(index)}
+                      className="aspect-square overflow-hidden rounded-xl bg-landing-arena focus-visible:outline focus-visible:outline-offset-2 focus-visible:outline-landing-marino"
                     >
                       <img
                         src={getFotoUrl(foto.url)}
@@ -45,7 +49,7 @@ const GaleriaAcordeon = ({ fotos }) => {
                         loading="lazy"
                         className="h-full w-full object-cover transition-transform duration-300 hover:scale-105"
                       />
-                    </div>
+                    </button>
                   ))}
                 </div>
               ) : (
@@ -58,6 +62,15 @@ const GaleriaAcordeon = ({ fotos }) => {
           </div>
         </div>
       </div>
+
+      {hayFotos && (
+        <Lightbox
+          fotos={fotos}
+          indice={indiceLightbox}
+          onCerrar={() => setIndiceLightbox(null)}
+          onCambiarIndice={setIndiceLightbox}
+        />
+      )}
     </section>
   );
 };

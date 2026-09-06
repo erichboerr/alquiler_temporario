@@ -37,17 +37,20 @@ const Landing = () => {
         );
     }
 
-    const { propiedad, fotos, meses } = datos;
+    const { propiedad, fotos, caracteristicas, meses } = datos;
     const fotoPortada = fotos?.[0] ?? null;
+    // La foto de posición 0 ya se muestra arriba como portada (PropiedadHero),
+    // así que en el acordeón de fotos mostramos solo de la 1 en adelante para no repetirla.
+    const fotosGaleria = fotos?.slice(1) ?? [];
 
     return (
         <div className="min-h-screen bg-landing-arena font-body">
             <PropiedadHero propiedad={propiedad} fotoPortada={fotoPortada} />
             <PropiedadCaracteristicas
                 descripcion={propiedad?.descripcion}
-                caracteristicas={propiedad?.caracteristicas}
+                caracteristicas={caracteristicas}
             />
-            <GaleriaAcordeon fotos={fotos} />
+            <GaleriaAcordeon fotos={fotosGaleria} />
             <MesesDisponibilidad
                 meses={meses}
                 whatsappNumero={propiedad?.whatsappNumero}

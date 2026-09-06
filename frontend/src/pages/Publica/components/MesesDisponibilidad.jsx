@@ -1,4 +1,4 @@
-import { CalendarDays, TriangleAlert } from 'lucide-react';
+import { CalendarDays, Megaphone } from 'lucide-react';
 import WhatsappIconLink from './WhatsappIconLink';
 import { formatPrecio, formatRangoFechas } from '../../../common/utils/format';
 
@@ -10,8 +10,8 @@ const FilaPeriodo = ({ periodo, mesTitulo, whatsappNumero, whatsappMensajeBase }
   // así el que pregunta ya arranca la conversación siendo específico.
   const rango = formatRangoFechas(periodo.fechaDesde, periodo.fechaHasta);
   const mensaje = whatsappMensajeBase
-    ? `${whatsappMensajeBase} (${mesTitulo}, ${rango})`
-    : `Hola! Quería consultar disponibilidad para ${mesTitulo} (${rango}).`;
+    ? `${whatsappMensajeBase} ${mesTitulo} del ${rango}`
+    : `Hola! Quería consultar disponibilidad para ${mesTitulo} del ${rango}.`;
 
   return (
     <div className="flex items-center justify-between gap-3 py-2.5">
@@ -75,7 +75,7 @@ const MesesDisponibilidad = ({ meses, whatsappNumero, whatsappMensajeBase }) => 
         </h2>
       </div>
       <div className="mb-8 flex items-center gap-3">
-        <TriangleAlert size={28} className="text-landing-atardecer" />
+        <Megaphone  size={28} className="text-landing-atardecer" />
         <h2 className="font-display text-2xl font-semibold text-landing-atardecer sm:text-2xl">
           Se reserva con el 30% del total.
         </h2>

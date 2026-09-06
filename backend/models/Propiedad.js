@@ -10,8 +10,6 @@ export default (sequelize, DataTypes) => {
       banos: { type: DataTypes.INTEGER, allowNull: true },
       // String y no integer: admite formatos como "4 + 1" (capacidad base + extra)
       ocupantes: { type: DataTypes.STRING, allowNull: true },
-      // Array de strings: ["Living comedor y cocina", "Patio con parrilla"]
-      caracteristicas: { type: DataTypes.JSONB, allowNull: false, defaultValue: [] },
       whatsappNumero: { type: DataTypes.STRING, allowNull: true },
       whatsappMensaje: { type: DataTypes.STRING, allowNull: true },
     },
@@ -28,10 +26,16 @@ export default (sequelize, DataTypes) => {
       foreignKey: "propiedadId",
       as: "fotos",
     });
-    // Una propiedad tiene muchas tarjetas de mes
-    Propiedad.hasMany(models.MesCard, {
+    // Una propiedad tiene muchas temporadas (ej: "2026-2027", "2027-2028")
+    // y cada temporada tiene sus propias tarjetas de mes.
+    Propiedad.hasMany(models.Temporada, {
       foreignKey: "propiedadId",
-      as: "meses",
+      as: "temporadas",
+    });
+    // Ítems cortos tipo lista (ej: "Pileta", "WiFi"), cada uno con su propio orden
+    Propiedad.hasMany(models.Caracteristica, {
+      foreignKey: "propiedadId",
+      as: "caracteristicas",
     });
   };
 

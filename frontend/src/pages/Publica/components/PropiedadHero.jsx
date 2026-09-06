@@ -1,5 +1,7 @@
-import { MapPin, BedDouble, Bath, Users } from 'lucide-react';
+import { useState } from 'react';
+import { BedDouble, Bath, Users } from 'lucide-react';
 import { getFotoUrl } from '../../../common/services/api';
+import MapaModal from './MapaModal';
 
 // Chip chico para un dato rápido (habitaciones, baños)
 // eslint-disable-next-line no-unused-vars
@@ -12,6 +14,8 @@ const Chip = ({ icon: Icon, label }) => (
 
 const PropiedadHero = ({ propiedad, fotoPortada }) => {
   const tieneFoto = Boolean(fotoPortada);
+  // Modal del mapa: cerrado por defecto, se abre al tocar el ícono junto a la dirección
+  const [mapaAbierto, setMapaAbierto] = useState(false);
 
   return (
     <header className="relative isolate">
@@ -39,8 +43,23 @@ const PropiedadHero = ({ propiedad, fotoPortada }) => {
             </h1>
             {propiedad?.direccion && (
               <p className="mt-2 flex items-center gap-2 text-sm text-white/90 sm:text-base">
-                <MapPin size={16} />
                 {propiedad.direccion}
+                <button
+                  onClick={() => setMapaAbierto(true)}
+                  aria-label="Ver ubicación en el mapa"
+                  title="Ver ubicación en el mapa"
+                  className="ml-1 rounded-full p-1 hover:bg-white/20"
+                >
+                  {/* Único pin (antes había uno blanco al lado que quedaba repetido con este).
+                      Se balancea suavemente cada tanto para que se note que es tocable. */}
+                  <svg viewBox="0 0 24 24" className="h-5 w-5 animate-pin" aria-hidden="true">
+                    <path
+                      fill="#EA4335"
+                      d="M12 2C7.86 2 4.5 5.36 4.5 9.5c0 5.25 6.5 11.6 7 12.06.28.26.72.26 1 0 .5-.46 7-6.81 7-12.06C19.5 5.36 16.14 2 12 2z"
+                    />
+                    <circle cx="12" cy="9.5" r="3" fill="#ffffff" />
+                  </svg>
+                </button>
               </p>
             )}
 
@@ -74,6 +93,10 @@ const PropiedadHero = ({ propiedad, fotoPortada }) => {
       >
         <path d="M0,20 C240,50 480,0 720,15 C960,30 1200,55 1440,25 L1440,50 L0,50 Z" />
       </svg>
+
+      {mapaAbierto && (
+        <MapaModal direccion={propiedad.direccion} onCerrar={() => setMapaAbierto(false)} />
+      )}
     </header>
   );
 };

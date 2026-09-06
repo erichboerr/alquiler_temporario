@@ -1,14 +1,17 @@
 import { Link } from 'react-router-dom';
-import { Package, LayoutDashboard, LogOut } from 'lucide-react';
-import { NavGroup } from './NavItem';
+import { Package, Home, Images, CalendarRange, LogOut } from 'lucide-react';
 import { useAuth } from '../hooks/useAuth';
 
 const Sidebar = ({ isCollapsed, setIsCollapsed }) => {
     const { logout } = useAuth();
 
     // El nombre de la app se lee del .env (VITE_APP_NAME).
-    // Si no está definido cae en 'Mi App' — nunca hardcodeado acá.
-    const appName = import.meta.env.VITE_APP_NAME || 'Mi App';
+    // Si no está definido cae en 'Administracion de Propiedades' — nunca hardcodeado acá.
+    const appName = import.meta.env.VITE_APP_NAME || 'Administracion';
+
+    // setIsCollapsed no se usa acá por ahora (era para el submenú de Productos
+    // que sacamos), se deja recibido para no romper la firma que usa MainLayout.
+    void setIsCollapsed;
 
     return (
         <aside className={`bg-slate-900 h-screen text-slate-300 flex flex-col fixed left-0 top-0 z-20 transition-all duration-300 ${isCollapsed ? 'w-20' : 'w-64'}`}>
@@ -25,22 +28,31 @@ const Sidebar = ({ isCollapsed, setIsCollapsed }) => {
                 )}
             </div>
 
-            {/* Navegación principal */}
+            {/* Navegación principal — orden: Propiedad, Fotos, Temporada */}
             <nav className="flex-1 p-4 space-y-2 overflow-y-auto overflow-x-hidden">
                 <Link
-                    to="/dashboard"
+                    to="/admin/propiedad"
                     className="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-slate-800 transition-colors"
                 >
-                    <LayoutDashboard size={20} className="shrink-0" />
-                    {!isCollapsed && <span>Dashboard</span>}
+                    <Home size={20} className="shrink-0" />
+                    {!isCollapsed && <span>Propiedad</span>}
                 </Link>
 
-                {/* Ejemplo de grupo con submenú — reemplazar con las rutas del proyecto */}
-                <NavGroup icon={Package} label="Productos" isCollapsed={isCollapsed} setIsCollapsed={setIsCollapsed}>
-                    <Link to="/productos/inventario" className="block py-2 text-sm pl-2 hover:text-white">
-                        Inventario
-                    </Link>
-                </NavGroup>
+                <Link
+                    to="/admin/fotos"
+                    className="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-slate-800 transition-colors"
+                >
+                    <Images size={20} className="shrink-0" />
+                    {!isCollapsed && <span>Fotos</span>}
+                </Link>
+
+                <Link
+                    to="/admin/temporada"
+                    className="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-slate-800 transition-colors"
+                >
+                    <CalendarRange size={20} className="shrink-0" />
+                    {!isCollapsed && <span>Temporada</span>}
+                </Link>
             </nav>
 
             {/* Botón de logout */}

@@ -14,8 +14,8 @@ const ProtectedRoute = ({ allowedRoles }) => {
 
     // 3. Si se definieron roles permitidos y el usuario NO tiene ese rol
     if (allowedRoles && !allowedRoles.includes(user.rol)) {
-        // Lo mandamos al dashboard si intenta entrar a algo prohibido
-        return <Navigate to="/dashboard" replace />;
+        // Lo mandamos a Propiedad si intenta entrar a algo prohibido
+        return <Navigate to="/admin/propiedad" replace />;
     }
 
     // 4. Si todo está bien, permitimos el acceso

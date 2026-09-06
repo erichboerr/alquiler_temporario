@@ -1,5 +1,5 @@
 import { MessageCircle } from 'lucide-react';
-import { armarLinkWhatsapp } from './WhatsappButton';
+import { armarLinkWhatsapp } from '../../../common/utils/whatsapp';
 
 // Versión chica, solo ícono, pensada para ir al lado del precio de cada renglón de período.
 // numero/mensaje: mismo formato que WhatsappButton.

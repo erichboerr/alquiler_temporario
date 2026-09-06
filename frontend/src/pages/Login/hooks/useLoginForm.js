@@ -18,7 +18,7 @@ export const useLoginForm = () => {
         try {
             await login(user, password);
             addToast(`¡Bienvenido, ${user}!`, 'success');
-            navigate('/dashboard');
+            navigate('/admin/propiedad');
         } catch (err) {
             // El interceptor de api.js ya muestra el toast — no duplicamos el mensaje
             if (import.meta.env.DEV) {

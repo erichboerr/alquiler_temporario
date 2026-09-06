@@ -3,7 +3,7 @@ export default (sequelize, DataTypes) => {
     "MesCard",
     {
       id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
-      propiedadId: { type: DataTypes.INTEGER, allowNull: false },
+      temporadaId: { type: DataTypes.INTEGER, allowNull: false },
       titulo: { type: DataTypes.STRING, allowNull: false },
       orden: { type: DataTypes.INTEGER, allowNull: false, defaultValue: 0 },
     },
@@ -15,9 +15,11 @@ export default (sequelize, DataTypes) => {
   );
 
   MesCard.associate = (models) => {
-    MesCard.belongsTo(models.Propiedad, {
-      foreignKey: "propiedadId",
-      as: "propiedad",
+    // Ahora el mes depende de la temporada, no directo de la propiedad.
+    // La propiedad se obtiene navegando mes -> temporada -> propiedad.
+    MesCard.belongsTo(models.Temporada, {
+      foreignKey: "temporadaId",
+      as: "temporada",
     });
     // Una tarjeta de mes tiene muchos períodos (renglones de fecha + precio)
     MesCard.hasMany(models.Periodo, {
