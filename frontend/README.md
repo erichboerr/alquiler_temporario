@@ -84,11 +84,14 @@ frontend/
 │   │   │   └── propiedad.service.js # Llamadas a /api/propiedad (pública + admin)
 │   │   │
 │   │   └── utils/
-│   │       └── format.js            # formatPrecio, formatRangoFechas (usados en la landing)
+│   │       ├── format.js            # formatPrecio, formatRangoFechas (usados en la landing)
+│   │       └── whatsapp.js          # armarLinkWhatsapp (separado para no romper Fast Refresh)
 │   │
 │   ├── pages/
-│   │   ├── Dashboard/
-│   │   │   └── Dashboard.jsx        # Página de inicio post-login
+│   │   ├── Admin/                   # Panel privado — requiere login
+│   │   │   ├── AdminPropiedad.jsx   # Datos generales + características (ruta /admin/propiedad)
+│   │   │   ├── AdminFotos.jsx       # Portada + galería con drag&drop (ruta /admin/fotos)
+│   │   │   └── AdminTemporada.jsx   # Selector de temporada + planilla de meses/períodos (ruta /admin/temporada)
 │   │   ├── Login/
 │   │   │   ├── Login.jsx            # UI del formulario de login
 │   │   │   └── hooks/
@@ -96,11 +99,14 @@ frontend/
 │   │   └── Publica/                 # Landing pública — sin login, ruta "/"
 │   │       ├── Landing.jsx          # Página: fetch a /api/propiedad y composición de secciones
 │   │       └── components/
-│   │           ├── PropiedadHero.jsx         # Foto de portada + nombre/dirección + chips
+│   │           ├── PropiedadHero.jsx         # Foto de portada + nombre/dirección + chips + mapa
 │   │           ├── PropiedadCaracteristicas.jsx # Descripción + lista de características
 │   │           ├── GaleriaAcordeon.jsx       # Panel colapsable con la galería de fotos
+│   │           ├── Lightbox.jsx              # Vista ampliada de fotos con flechas
+│   │           ├── MapaModal.jsx             # Modal con el mapa de Google embebido
 │   │           ├── MesesDisponibilidad.jsx   # Grilla de tarjetas de mes (períodos + precio)
-│   │           └── WhatsappButton.jsx        # Botón reutilizable, arma el link wa.me
+│   │           ├── WhatsappButton.jsx        # Botón grande (hero), arma el link wa.me
+│   │           └── WhatsappIconLink.jsx      # Ícono chico por período, mismo link wa.me
 │   │
 │   ├── App.jsx                      # Rutas, providers y setup de interceptores
 │   ├── main.jsx                     # Punto de entrada de React
@@ -327,12 +333,14 @@ ProtectedRoute acepta allowedRoles con los roles que pueden acceder:
 // Cualquier usuario autenticado (sin allowedRoles)
 <Route element={<ProtectedRoute />}>
     <Route element={<MainLayout />}>
-        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/admin/propiedad" element={<AdminPropiedad />} />
+        <Route path="/admin/fotos" element={<AdminFotos />} />
+        <Route path="/admin/temporada" element={<AdminTemporada />} />
     </Route>
 </Route>
 ```
 
-Si el usuario no tiene el rol requerido, es redirigido a /dashboard.
+Si el usuario no tiene el rol requerido, es redirigido a /admin/propiedad.
 
 > La protección por rol en el frontend es solo UX. La autorización real debe
 > estar en el backend con el middleware authorize() por ruta.

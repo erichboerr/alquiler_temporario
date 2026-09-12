@@ -1,16 +1,16 @@
-import { 
-  FaCheckCircle, 
-  FaExclamationCircle, 
-  FaExclamationTriangle, 
-  FaInfoCircle, 
-  FaTimes 
-} from "react-icons/fa";
+import {
+  CheckCircle,
+  AlertCircle,
+  AlertTriangle,
+  Info,
+  X,
+} from "lucide-react";
 
 const iconMap = {
-  success: <FaCheckCircle className="text-green-500" />,
-  error: <FaExclamationCircle className="text-red-500" />,
-  warning: <FaExclamationTriangle className="text-yellow-500" />,
-  info: <FaInfoCircle className="text-blue-500" />,
+  success: <CheckCircle className="text-green-500" size={20} />,
+  error: <AlertCircle className="text-red-500" size={20} />,
+  warning: <AlertTriangle className="text-yellow-500" size={20} />,
+  info: <Info className="text-blue-500" size={20} />,
 };
 
 const bgMap = {
@@ -36,7 +36,7 @@ export default function ToastItem({ t, removeToast }) {
         onClick={() => removeToast(t.id)}
         className="ml-auto -mx-1.5 -my-1.5 bg-white text-gray-400 hover:text-gray-900 rounded-lg p-1.5 inline-flex h-8 w-8 transition"
       >
-        <FaTimes />
+        <X size={16} />
       </button>
     </div>
   );
